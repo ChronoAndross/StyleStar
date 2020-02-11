@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Xamarin.Forms.4.4.0.991640\build\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.4.4.0.991640\build\Xamarin.Forms.props')" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +14,7 @@
     <AssemblyName>StyleStar</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -24,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -33,6 +35,7 @@
     <DefineConstants>TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
@@ -78,24 +81,117 @@
     <Compile Include="UIScreen.cs" />
     <Compile Include="UserSettings.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="sdl\SDL2.cs" />
+    <Compile Include="sdl\SDL2_image.cs" />
+    <Compile Include="sdl\SDL2_mixer.cs" />
+    <Compile Include="sdl\SDL2_ttf.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Bass.Net, Version=2.4.10.3, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Programming\Bass24.Net\v4.5\Bass.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Nett, Version=0.13.0.0, Culture=neutral, PublicKeyToken=605dcfe7a1d3365b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nett.0.13.0\lib\net40\Nett.dll</HintPath>
-    </Reference>
     <Reference Include="StbTrueTypeSharp">
       <HintPath>..\lib\StbTrueTypeSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\packages\Xamarin.Forms.4.4.0.991640\lib\netstandard2.0\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\packages\Xamarin.Forms.4.4.0.991640\lib\netstandard2.0\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\packages\Xamarin.Forms.4.4.0.991640\lib\netstandard2.0\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Lidgren.Network">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework.Content.Pipeline">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\MonoGame.Framework.Content.Pipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework.Net">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\MonoGame.Framework.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="AssimpNet">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\assimp\AssimpNet.dll</HintPath>
+    </Reference>
+    <Reference Include="ATI.TextureConverter">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\ATI.TextureConverter\ATI.TextureConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="CppNet">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\CppNet\CppNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\Eto\Eto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.Wpf">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\Eto\Eto.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeImageNET">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\FreeImage.NET\Windows\FreeImageNET.dll</HintPath>
+    </Reference>
+    <Reference Include="Nvidia.TextureTools">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\NVTT\Windows\Nvidia.TextureTools.dll</HintPath>
+    </Reference>
+    <Reference Include="PVRTexLibNET">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\PVRTexLibNET\PVRTexLibNET.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.D3DCompiler">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\SharpDX\Windows\SharpDX.D3DCompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\SharpDX\Windows\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\SharpDX\Windows\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\SharpDX\Windows\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\SharpDX\Windows\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.MediaFoundation">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\SharpDX\Windows\SharpDX.MediaFoundation.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.RawInput">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\SharpDX\Windows\SharpDX.RawInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XAudio2">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\SharpDX\Windows\SharpDX.XAudio2.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\SharpDX\Windows\SharpDX.XInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpFont">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\SharpFont\x64\SharpFont.dll</HintPath>
+    </Reference>
+    <Reference Include="NDesk.Options">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\Tests\NDesk.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\Tests\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\Tests\nunit.core.interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\Tests\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.util">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\Tests\nunit.util.dll</HintPath>
+    </Reference>
+    <Reference Include="Xwt">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\xwt\Xwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Xwt.WPF">
+      <HintPath>..\packages\MonoGame.Framework.Redpoint.3.5.0\lib\net45\_AutomaticExternals\ThirdParty\Dependencies\xwt\Xwt.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Nett">
+      <HintPath>..\packages\Nett.0.13.0\lib\net40\Nett.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
@@ -118,7 +214,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -126,4 +221,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\packages\Xamarin.Forms.4.4.0.991640\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.4.4.0.991640\build\Xamarin.Forms.targets')" />
 </Project>
